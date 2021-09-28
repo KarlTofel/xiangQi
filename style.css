@@ -6,3 +6,9 @@ button {
     float: left;
     position: absolute; top: 550px; left: 50px;
 }
+a {
+    float: right;
+}
+p {
+    position: absolute; bottom: 0;
+}
