@@ -1,43 +1,39 @@
-function generateRow(data) {
-    var row = [];
-    for (i = 0; i < 9; i++) {
-        // should have been done with with an established class: const spotOnField = (x, y, side, piece, colour, character) => { return { x, y,  side, piece, colour, character } }
-        row.push({x: i, y: data, side: setSide(data), piece: {colour: "none", char: "none"}});
-    }
-    // should have been: row.map(function(element, index) { spotOnField(index, data, 'none', 'none') } )
-    return row
-}
-function generateFields() {
-    var field = [];
-    for (j = 0; j < 10; j++) {
-        field.push(generateRow(j));
-    }
-    return field
+// this is how the starting position of the board should look like: https://i.brainking.com/rules/xiangqi/01.gif
+function generateInitalBoard() {
+    const yAxis = new Array(10).fill([])
+    const board = yAxis.map((element, y) => {
+        const xAxis = new Array(9).fill(null);
+        return xAxis.map((el, x) => {
+            return boardSpot(x, y);
+        })
+    })
+    // this has now created an array where { x: 5, y: 0 } is array[0][5]
+
+    return setGameBoard(board);
+    // with this we have changed the spot.piece properties and put them into starting position
 }
 
-// should not have been using global variables
-var fields = generateFields();
-
-function setGameBoard() {
-    setFirstRow(fields[0]);
-    setFirstRow(fields[9]);
-    setThirdRow(fields[2]);
-    setThirdRow(fields[7]);
-    setFourthRow(fields[3]);
-    setFourthRow(fields[6]);
+function setGameBoard(board) {
+    const placedPieces = board;
+    setFirstRow(placedPieces[0]);
+    setFirstRow(placedPieces[9]);
+    setThirdRow(placedPieces[2]);
+    setThirdRow(placedPieces[7]);
+    setFourthRow(placedPieces[3]);
+    setFourthRow(placedPieces[6]);
+    return placedPieces;
 }
-function setPiece(field, char) {
+function setPiece(field, name) {
     field.piece.colour = field.side;
-    field.piece.char = char;
+    field.piece.name = name;
 }
-function setPair(row, number, char) {
+function setPair(row, number, name) {
     // settting the field in pairs, as the position of pieces on the two sides is mirrored
     var paired = 8 - number;
-    setPiece(row[number], char);
-    setPiece(row[paired], char);
+    setPiece(row[number], name);
+    setPiece(row[paired], name);
 }
 function setFirstRow(row) {
-    // char is a badly named property (name would be better)
     setPair(row, 0, "chariot");
     setPair(row, 1, "horse");
     setPair(row, 2, "minister");
@@ -52,4 +48,3 @@ function setFourthRow(row) {
     setPair(row, 2, "pawn");
     setPiece(row[4], "pawn")
 }
-setGameBoard();

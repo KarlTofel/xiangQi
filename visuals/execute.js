@@ -1,2 +1,2 @@
 createField();
-displayStart(fields);
+displayStart(generateInitalBoard(), pieceCharacters);
