@@ -1,0 +1,8 @@
+canvas {
+    border: 1px black solid;
+    position: absolute; top: 0px; left: 0px;
+}
+button {
+    float: left;
+    position: absolute; top: 550px; left: 50px;
+}
