@@ -45,18 +45,11 @@ const pieceCharacters = {
 }
 
 // this class is one spot on the gaming board (includes what the piece is if any, the colour of the piece, which half of the board it is)
-const boardSpot = (x, y, colour = none, name = none) => {
-    function whichSide(y) {
-        if (y < 5) {
-            return black;
-        } else {
-            return red;
-        }
-    }
+const boardSpot = (x, y, side = red, colour = none, name = none) => {
     return {
         x,
         y,
-        side: whichSide(y),
+        side,
         piece: {
             colour,
             name,

@@ -8,3 +8,10 @@ function changeColour(colour) {
 function getBoardSpot(board, x, y) {
     return board[y][x]
 }
+function getBoardHalf(maxY, y) {
+    if (y < maxY / 2) {
+        return black;
+    } else {
+        return red;
+    }
+}
